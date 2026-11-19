@@ -35,7 +35,9 @@ export class WispClient {
     this.nextId = 1;
     this.initialCredit = 0;
     this.closed = false;
+    this.onshutdown = null;   // (reason) => void, called once when the session ends for any reason
     this.ready = new Promise((resolve, reject) => { this._ready = resolve; this._fail = reject; });
+    this.ready.catch(() => {});   // a session that dies before anyone awaits ready must not become an unhandled rejection
     this._onMessage = e => this._message(e.data);
     this._onClose = () => this._shutdown('relay connection closed');
     this._onError = () => this._shutdown('relay connection failed');
@@ -83,6 +85,7 @@ export class WispClient {
     this.ws.removeEventListener('message', this._onMessage);
     this.ws.removeEventListener('close', this._onClose);
     this.ws.removeEventListener('error', this._onError);
+    if (this.onshutdown) { try { this.onshutdown(reason); } catch (_) {} }
   }
 
   // Open a TCP stream. Returns a WispStream immediately; data may be written at once (the spec allows it).
@@ -104,7 +107,7 @@ export class WispClient {
 
   close() {
     this._shutdown('closed by client');
-    try { this.ws.close(); } catch (_) {}
+    try { const r = this.ws.close(); if (r && typeof r.catch === 'function') r.catch(() => {}); } catch (_) {}   // MixWebSocket.close() is async
   }
 }
 

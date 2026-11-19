@@ -6,9 +6,10 @@
 <meta name="theme-color" content="#07080b">
 <meta name="description" content="SWARM OS: a desktop operating system in one HTML file, built by a swarm of Claude agents.">
 <title>SWARM OS</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' https: wss: data: blob:; worker-src 'self' blob:; frame-src about:; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta http-equiv="x-dns-prefetch-control" content="off">
+<meta name="referrer" content="no-referrer">
+<link rel="stylesheet" href="./net/fonts/fonts.css">
 <script type="importmap">{"imports":{"@nymproject/mix-tunnel":"./net/vendor/mix-tunnel/index.js"}}</script>
 <script>window.__VEIL_NET_PENDING__=new Promise(function(r){window.__veilNetResolve=r;});</script>
 <script type="module" src="./net/veilnet.js"></script>
@@ -302,7 +303,7 @@ body { font: 13px/1.45 var(--os-font); color: var(--os-fg); -webkit-font-smoothi
 </head>
 <body>
 <div id="os"></div>
-<script>window.__SWARM_BUILD__={"date":"2026-11-17T04:14:53+00:00","orchestrator":"Claude Opus 5.5","agentModel":"Claude Fable 5.2","kernel":{"lines":1380},"shell":{"lines":1888},"apps":{"terminal":{"lines":6553,"bytes":440442,"orchLines":533,"features":["nsh, a shell with pipes, redirects, here-docs, globbing, arithmetic, functions, case/while/until and job control","118 commands over the virtual filesystem, from grep, sed, awk and jq to find, xargs, diff and tree","A Scheme interpreter with 170 builtins, proper tail calls, call/cc, define-macro and records","Man pages for 105 commands, which also drive --help and option completion","Live syntax highlighting, autosuggestions, a tab-completion grid and Ctrl+R history search","Talks to the OS: ps, kill, open, notify, apps, neofetch","js runs JavaScript in a sandboxed frame; plus sha256sum, base64, xxd, bc and factor","Extra-keys bar on phones (Esc, Tab, Ctrl, arrows)"],"tech":["Recursive-descent parser","ANSI screen model","Scheme with call/cc","Virtual filesystem","Sandboxed iframe"],"tests":"654 of 674 core tests pass. The UI was driven end to end in headless Chrome on desktop and mobile.","tagline":"nsh: a real shell, 100+ commands and a Scheme inside","minutes":73,"by":"Fable 5.2 agent + orchestrator","credit":"The Fable agent wrote the shell, all commands, the Scheme interpreter and the screen model, then hit the usage limit before wiring the window UI. The orchestrator (Claude Opus 5.5) wrote that UI layer (533 lines on top of the agent's tested core) and tightened neofetch's layout."},"forge":{"lines":4239,"bytes":276869,"orchLines":478,"features":["Editor written from scratch: text model, undo, multiple cursors, folding, minimap, bracket matching","Hand-written tokenizers for JS/TS, HTML, CSS, JSON, Markdown, Python, C, shell, Scheme and more","Live HTML/CSS preview that follows every keystroke","Runs JavaScript in a sandboxed frame with a real console: groups, tables, and errors linked to file:line","Loops are instrumented before a run, so an infinite loop can be stopped","Markdown preview with tables and task lists; ticking a box edits the source","Command palette, quick open, regex find/replace, go to line and symbol","Syntax errors are marked as you type, without executing anything","Restores open tabs and layout between sessions"],"tech":["Custom text model","Incremental tokenizers","Sandboxed iframe","postMessage console","Markdown renderer"],"tests":"All 419 build-time checks pass (tokenizers, text model, Markdown, sandbox). The UI was driven end to end in headless Chrome.","tagline":"Code editor with live preview and a sandbox","minutes":75,"by":"Fable 5.2 agent + orchestrator","credit":"The Fable agent wrote the editor engine, every tokenizer, the Markdown renderer, the sandbox and most of the UI, then hit the usage limit. The orchestrator (Claude Opus 5.5) finished the last 478 lines: the command table, preview, console and lifecycle."},"kiln":{"lines":4110,"bytes":248534,"orchLines":0,"features":["A C compiler in the browser: preprocessor, parser, semantic analysis and WebAssembly code generation","Structs, unions, enums, typedefs, pointers, function pointers, switch/goto, varargs and doubles","#define/#if macros, printf, malloc/free and a small libc","Runs on real WebAssembly, or on Kiln's own bytecode VM where wasm is blocked","Disassembler (binary \u2192 WAT) and an annotated hex view of the module it emits","A pixel canvas for graphics: the 9 samples include a raytracer, plasma, Mandelbrot and Life"],"tech":["Recursive descent","WebAssembly binary format","Bytecode VM","WAT disassembler"],"tests":"Differential test: 20 C programs compiled by Kiln match gcc's output and exit code exactly, on both WebAssembly and the VM.","tagline":"C \u2192 WebAssembly compiler, written from scratch","minutes":75,"by":"Claude Fable 5.2 agent","credit":""},"grid":{"lines":3154,"bytes":259332,"orchLines":0,"features":["Formula engine from scratch: tokenizer, Pratt parser, dependency graph and incremental recalculation","154 functions, including XLOOKUP, SUMIFS, SUMPRODUCT, TEXTJOIN, INDEX/MATCH, PMT, NPV and IRR","Dynamic arrays that spill: SEQUENCE, FILTER, SORTBY, UNIQUE","Circular-reference detection","Charts: bar, column, line, area and donut","Conditional formatting with data bars and highlight rules","Freeze panes, sort and filter, CSV import and export, full undo"],"tech":["Pratt parser","Dependency graph","Dynamic arrays","Canvas charts"],"tests":"783 formula-engine tests pass.","tagline":"Spreadsheet with a real formula engine","minutes":72,"by":"Claude Fable 5.2 agent","credit":""},"pulse":{"lines":2530,"bytes":174175,"orchLines":0,"features":["An 8-voice drum machine with nothing sampled: kick, snare, clap, two hats, tom, rim and crash","Bass, chord and arpeggio synths with FM, filters and LFOs","Step sequencer up to 32 steps, with velocity, per-step probability and swing","Effects: delay, convolution reverb, drive and a master compressor","Renders the song to a WAV file offline, faster than real time","5 demo songs to start from"],"tech":["Web Audio","OfflineAudioContext","FM synthesis","Seeded PRNG"],"tests":"755 tests pass.","tagline":"Groovebox and synth studio, all synthesized","minutes":72,"by":"Claude Fable 5.2 agent","credit":""},"fractal":{"lines":2798,"bytes":156198,"orchLines":0,"features":["Real-time GPU raymarcher for distance-estimated 3D fractals","Mandelbulb, Mandelbox, Menger sponge, quaternion Julia, Kleinian, Apollonian and kaleidoscopic IFS","Free-flying camera and an automatic tour","Progressive accumulation for clean, anti-aliased stills","Cosine color palettes, fog, glow and environment lighting","PNG export"],"tech":["WebGL2","GLSL raymarching","Distance estimators","Progressive accumulation"],"tests":"1,134 tests pass.","tagline":"Fly through 3D fractals, raymarched on the GPU","minutes":69,"by":"Claude Fable 5.2 agent","credit":""},"fluid":{"lines":2270,"bytes":128831,"orchLines":0,"features":["An incompressible Navier\u2013Stokes solver written from scratch on the GPU","Staggered MAC grid, MacCormack advection, implicit viscosity, warm-started pressure projection","Vorticity confinement, thermal buoyancy, solid obstacles and a body you can drag","Wind tunnel with inflow and outflow, where a K\u00e1rm\u00e1n vortex street forms on its own","High-resolution dye, GPU particles, bloom and light shafts","8 presets, including Ink in Water, Fire, Lava Lamp and Neon Storm","Falls back to WebGL1 with half floats"],"tech":["WebGL2","Navier\u2013Stokes","MacCormack advection","Red-black SOR","OKLCH color"],"tests":"Its test suite passes, including checks on all 35 shader programs.","tagline":"Real-time GPU fluid dynamics lab","minutes":71,"by":"Claude Fable 5.2 agent","credit":""},"synapse":{"lines":2636,"bytes":178522,"orchLines":0,"features":["A reverse-mode autograd engine over Float32Array tensors, with no libraries","Datasets: spiral, moons, circles, XOR, checkerboard, Gaussian blobs and regression","Optimizers: SGD, momentum, RMSProp and Adam, with L2 weight decay","Activations: ReLU, leaky ReLU, tanh, sigmoid and GELU; softmax cross-entropy","Live decision boundary, loss curves and per-neuron views","Explain reads the live network and says in plain words what it is doing"],"tech":["Reverse-mode autodiff","Float32Array tensors","Canvas"],"tests":"188 tests pass, including 62 gradient checks against finite differences (worst float64 error 1.3e-8).","tagline":"Train neural networks live and watch them learn","minutes":73,"by":"Claude Fable 5.2 agent","credit":""},"gambit":{"lines":3054,"bytes":185637,"orchLines":0,"features":["Engine from scratch: alpha-beta with PVS, transposition table, null-move pruning, LMR and futility pruning","Move ordering by static exchange evaluation, killer moves and history; quiescence search","Searches in a Web Worker, so the board never stutters","Five strengths from Novice to Grandmaster, and clocks (3+2, 5+3, 10+0)","Opening book, PGN import, move list and an evaluation bar"],"tech":["0x88 board","Zobrist hashing","Web Worker","Iterative deepening"],"tests":"Perft matches every reference position (34.9M nodes at 7.6M nodes/s). 3,495 searches over 70 self-play games, all legal.","tagline":"Chess with a real engine, written from scratch","minutes":70,"by":"Claude Fable 5.2 agent","credit":""},"breach":{"lines":2423,"bytes":190549,"orchLines":0,"features":["Software renderer: DDA walls, floor and ceiling casting, a colored light grid and sprites","3 levels: Cold Aisle, Thermal Exchange and Root Core","3 weapons, modeled from 3D primitives: Pulse Pistol, Scatter Gun and Plasma Rifle","4 enemy types with their own behavior: Mite, Leech, Bulwark and Warden","Every texture, sprite, level and sound is generated in code","Pointer lock on desktop, twin-stick touch controls on phones","3 difficulty levels: Recruit, Operator and Root"],"tech":["Raycasting","Uint32 framebuffer","Procedural textures","Synthesized audio"],"tests":"111 tests pass.","tagline":"Raycasting FPS: purge the rogue drones","minutes":75,"by":"Claude Fable 5.2 agent","credit":""},"cipher":{"lines":2475,"bytes":197770,"orchLines":12,"features":["SHA-256 visualizer that steps through every compression round","Hash lab: SHA-256, SHA-3, RIPEMD-160 and HMAC","secp256k1 keys, ECDSA with RFC 6979 nonces, and BIP-340 Schnorr signatures","Bitcoin addresses: Base58, bech32 and bech32m (Taproot)","Curve explorer for elliptic curves over small fields","Proof-of-work miner in a Web Worker, starting from the genesis block","Enigma machine with rotors, ring settings and the double step","Vault: file encryption with PBKDF2 and AES-256-GCM"],"tech":["BigInt","secp256k1","Web Worker","WebCrypto"],"tests":"4,462 assertions pass against NIST, RFC 4231, RFC 6979, BIP-173/350, BIP-340/341 vectors and OpenSSL.","tagline":"Cryptography workbench: SHA-256, keys, mining, vault","minutes":350,"by":"Fable 5.2 agent + orchestrator","credit":"The Fable agent built all of Cipher. Later, the orchestrator (Claude Opus 5.5) added the miner's Copy header and Copy Python check buttons and fixed two labels that were cut off on phones (12 lines)."}},"extra":{"veil":{"lines":765,"bytes":51032,"by":"Claude Opus 5.5 (orchestrator)"}},"swarm":{"spawned":"2026-11-16T16:08:00+00:00","minutes":350,"stopped":"Every agent hit the Claude Fable usage limit."},"totals":{"lines":40275,"agentLines":35219,"orchAppLines":1023,"extraLines":765,"bytes":2720913,"apps":11}};</script>
+<script>window.__SWARM_BUILD__={"date":"2026-11-19T17:07:51+00:00","orchestrator":"Claude Opus 5.5","agentModel":"Claude Fable 5.2","kernel":{"lines":1380},"shell":{"lines":1888},"apps":{"terminal":{"lines":6553,"bytes":440442,"orchLines":533,"features":["nsh, a shell with pipes, redirects, here-docs, globbing, arithmetic, functions, case/while/until and job control","118 commands over the virtual filesystem, from grep, sed, awk and jq to find, xargs, diff and tree","A Scheme interpreter with 170 builtins, proper tail calls, call/cc, define-macro and records","Man pages for 105 commands, which also drive --help and option completion","Live syntax highlighting, autosuggestions, a tab-completion grid and Ctrl+R history search","Talks to the OS: ps, kill, open, notify, apps, neofetch","js runs JavaScript in a sandboxed frame; plus sha256sum, base64, xxd, bc and factor","Extra-keys bar on phones (Esc, Tab, Ctrl, arrows)"],"tech":["Recursive-descent parser","ANSI screen model","Scheme with call/cc","Virtual filesystem","Sandboxed iframe"],"tests":"654 of 674 core tests pass. The UI was driven end to end in headless Chrome on desktop and mobile.","tagline":"nsh: a real shell, 100+ commands and a Scheme inside","minutes":73,"by":"Fable 5.2 agent + orchestrator","credit":"The Fable agent wrote the shell, all commands, the Scheme interpreter and the screen model, then hit the usage limit before wiring the window UI. The orchestrator (Claude Opus 5.5) wrote that UI layer (533 lines on top of the agent's tested core) and tightened neofetch's layout."},"forge":{"lines":4239,"bytes":276869,"orchLines":478,"features":["Editor written from scratch: text model, undo, multiple cursors, folding, minimap, bracket matching","Hand-written tokenizers for JS/TS, HTML, CSS, JSON, Markdown, Python, C, shell, Scheme and more","Live HTML/CSS preview that follows every keystroke","Runs JavaScript in a sandboxed frame with a real console: groups, tables, and errors linked to file:line","Loops are instrumented before a run, so an infinite loop can be stopped","Markdown preview with tables and task lists; ticking a box edits the source","Command palette, quick open, regex find/replace, go to line and symbol","Syntax errors are marked as you type, without executing anything","Restores open tabs and layout between sessions"],"tech":["Custom text model","Incremental tokenizers","Sandboxed iframe","postMessage console","Markdown renderer"],"tests":"All 419 build-time checks pass (tokenizers, text model, Markdown, sandbox). The UI was driven end to end in headless Chrome.","tagline":"Code editor with live preview and a sandbox","minutes":75,"by":"Fable 5.2 agent + orchestrator","credit":"The Fable agent wrote the editor engine, every tokenizer, the Markdown renderer, the sandbox and most of the UI, then hit the usage limit. The orchestrator (Claude Opus 5.5) finished the last 478 lines: the command table, preview, console and lifecycle."},"kiln":{"lines":4110,"bytes":248534,"orchLines":0,"features":["A C compiler in the browser: preprocessor, parser, semantic analysis and WebAssembly code generation","Structs, unions, enums, typedefs, pointers, function pointers, switch/goto, varargs and doubles","#define/#if macros, printf, malloc/free and a small libc","Runs on real WebAssembly, or on Kiln's own bytecode VM where wasm is blocked","Disassembler (binary \u2192 WAT) and an annotated hex view of the module it emits","A pixel canvas for graphics: the 9 samples include a raytracer, plasma, Mandelbrot and Life"],"tech":["Recursive descent","WebAssembly binary format","Bytecode VM","WAT disassembler"],"tests":"Differential test: 20 C programs compiled by Kiln match gcc's output and exit code exactly, on both WebAssembly and the VM.","tagline":"C \u2192 WebAssembly compiler, written from scratch","minutes":75,"by":"Claude Fable 5.2 agent","credit":""},"grid":{"lines":3154,"bytes":259332,"orchLines":0,"features":["Formula engine from scratch: tokenizer, Pratt parser, dependency graph and incremental recalculation","154 functions, including XLOOKUP, SUMIFS, SUMPRODUCT, TEXTJOIN, INDEX/MATCH, PMT, NPV and IRR","Dynamic arrays that spill: SEQUENCE, FILTER, SORTBY, UNIQUE","Circular-reference detection","Charts: bar, column, line, area and donut","Conditional formatting with data bars and highlight rules","Freeze panes, sort and filter, CSV import and export, full undo"],"tech":["Pratt parser","Dependency graph","Dynamic arrays","Canvas charts"],"tests":"783 formula-engine tests pass.","tagline":"Spreadsheet with a real formula engine","minutes":72,"by":"Claude Fable 5.2 agent","credit":""},"pulse":{"lines":2530,"bytes":174175,"orchLines":0,"features":["An 8-voice drum machine with nothing sampled: kick, snare, clap, two hats, tom, rim and crash","Bass, chord and arpeggio synths with FM, filters and LFOs","Step sequencer up to 32 steps, with velocity, per-step probability and swing","Effects: delay, convolution reverb, drive and a master compressor","Renders the song to a WAV file offline, faster than real time","5 demo songs to start from"],"tech":["Web Audio","OfflineAudioContext","FM synthesis","Seeded PRNG"],"tests":"755 tests pass.","tagline":"Groovebox and synth studio, all synthesized","minutes":72,"by":"Claude Fable 5.2 agent","credit":""},"fractal":{"lines":2798,"bytes":156198,"orchLines":0,"features":["Real-time GPU raymarcher for distance-estimated 3D fractals","Mandelbulb, Mandelbox, Menger sponge, quaternion Julia, Kleinian, Apollonian and kaleidoscopic IFS","Free-flying camera and an automatic tour","Progressive accumulation for clean, anti-aliased stills","Cosine color palettes, fog, glow and environment lighting","PNG export"],"tech":["WebGL2","GLSL raymarching","Distance estimators","Progressive accumulation"],"tests":"1,134 tests pass.","tagline":"Fly through 3D fractals, raymarched on the GPU","minutes":69,"by":"Claude Fable 5.2 agent","credit":""},"fluid":{"lines":2270,"bytes":128831,"orchLines":0,"features":["An incompressible Navier\u2013Stokes solver written from scratch on the GPU","Staggered MAC grid, MacCormack advection, implicit viscosity, warm-started pressure projection","Vorticity confinement, thermal buoyancy, solid obstacles and a body you can drag","Wind tunnel with inflow and outflow, where a K\u00e1rm\u00e1n vortex street forms on its own","High-resolution dye, GPU particles, bloom and light shafts","8 presets, including Ink in Water, Fire, Lava Lamp and Neon Storm","Falls back to WebGL1 with half floats"],"tech":["WebGL2","Navier\u2013Stokes","MacCormack advection","Red-black SOR","OKLCH color"],"tests":"Its test suite passes, including checks on all 35 shader programs.","tagline":"Real-time GPU fluid dynamics lab","minutes":71,"by":"Claude Fable 5.2 agent","credit":""},"synapse":{"lines":2636,"bytes":178522,"orchLines":0,"features":["A reverse-mode autograd engine over Float32Array tensors, with no libraries","Datasets: spiral, moons, circles, XOR, checkerboard, Gaussian blobs and regression","Optimizers: SGD, momentum, RMSProp and Adam, with L2 weight decay","Activations: ReLU, leaky ReLU, tanh, sigmoid and GELU; softmax cross-entropy","Live decision boundary, loss curves and per-neuron views","Explain reads the live network and says in plain words what it is doing"],"tech":["Reverse-mode autodiff","Float32Array tensors","Canvas"],"tests":"188 tests pass, including 62 gradient checks against finite differences (worst float64 error 1.3e-8).","tagline":"Train neural networks live and watch them learn","minutes":73,"by":"Claude Fable 5.2 agent","credit":""},"gambit":{"lines":3054,"bytes":185637,"orchLines":0,"features":["Engine from scratch: alpha-beta with PVS, transposition table, null-move pruning, LMR and futility pruning","Move ordering by static exchange evaluation, killer moves and history; quiescence search","Searches in a Web Worker, so the board never stutters","Five strengths from Novice to Grandmaster, and clocks (3+2, 5+3, 10+0)","Opening book, PGN import, move list and an evaluation bar"],"tech":["0x88 board","Zobrist hashing","Web Worker","Iterative deepening"],"tests":"Perft matches every reference position (34.9M nodes at 7.6M nodes/s). 3,495 searches over 70 self-play games, all legal.","tagline":"Chess with a real engine, written from scratch","minutes":70,"by":"Claude Fable 5.2 agent","credit":""},"breach":{"lines":2423,"bytes":190549,"orchLines":0,"features":["Software renderer: DDA walls, floor and ceiling casting, a colored light grid and sprites","3 levels: Cold Aisle, Thermal Exchange and Root Core","3 weapons, modeled from 3D primitives: Pulse Pistol, Scatter Gun and Plasma Rifle","4 enemy types with their own behavior: Mite, Leech, Bulwark and Warden","Every texture, sprite, level and sound is generated in code","Pointer lock on desktop, twin-stick touch controls on phones","3 difficulty levels: Recruit, Operator and Root"],"tech":["Raycasting","Uint32 framebuffer","Procedural textures","Synthesized audio"],"tests":"111 tests pass.","tagline":"Raycasting FPS: purge the rogue drones","minutes":75,"by":"Claude Fable 5.2 agent","credit":""},"cipher":{"lines":2475,"bytes":197770,"orchLines":12,"features":["SHA-256 visualizer that steps through every compression round","Hash lab: SHA-256, SHA-3, RIPEMD-160 and HMAC","secp256k1 keys, ECDSA with RFC 6979 nonces, and BIP-340 Schnorr signatures","Bitcoin addresses: Base58, bech32 and bech32m (Taproot)","Curve explorer for elliptic curves over small fields","Proof-of-work miner in a Web Worker, starting from the genesis block","Enigma machine with rotors, ring settings and the double step","Vault: file encryption with PBKDF2 and AES-256-GCM"],"tech":["BigInt","secp256k1","Web Worker","WebCrypto"],"tests":"4,462 assertions pass against NIST, RFC 4231, RFC 6979, BIP-173/350, BIP-340/341 vectors and OpenSSL.","tagline":"Cryptography workbench: SHA-256, keys, mining, vault","minutes":350,"by":"Fable 5.2 agent + orchestrator","credit":"The Fable agent built all of Cipher. Later, the orchestrator (Claude Opus 5.5) added the miner's Copy header and Copy Python check buttons and fixed two labels that were cut off on phones (12 lines)."}},"extra":{"veil":{"lines":908,"bytes":61576,"by":"Claude Opus 5.5 (orchestrator)"}},"swarm":{"spawned":"2026-11-16T16:08:00+00:00","minutes":350,"stopped":"Every agent hit the Claude Fable usage limit."},"totals":{"lines":40418,"agentLines":35219,"orchAppLines":1023,"extraLines":908,"bytes":2732290,"apps":11}};</script>
 <script data-src="kernel/kernel.js">
 /*! SWARM OS kernel — processes · windows · virtual filesystem · services.
  *  Apps register with SwarmOS.register(manifest); see CONTRACT.md.
@@ -38662,16 +38663,19 @@ SwarmOS.register({
 </script>
 <script data-src="apps/veil.js">
 /* Veil: a layered private browser for SWARM OS.
- * Written by the orchestrator (Claude Opus 5.5) after the swarm; a Fable 5.2 review is scheduled.
+ * Written by the orchestrator (Claude Opus 5.5) after the swarm. On 2026-11-19 a Claude Fable 5.2 agent that had not
+ * seen the code reviewed it and proved three ways a hostile page could get a real link past the cleaner; the fixes
+ * below (no HTML round trip, SMIL and stray href removal, a frame watcher, per-hop circuits) come from that review.
  *
  * Layers, from the outside in:
  *   1. Route: requests leave through the Nym mixnet, Tor, or Tor running inside the mixnet (window.VeilNet).
  *      There is no code path to a direct connection, and a route that fails stays failed.
- *   2. Content: pages are parsed inertly, stripped of scripts, frames and active content, and rendered in a
- *      sandboxed frame whose policy only allows data: resources, so a missed tracker cannot reach the network.
- *   3. Identity: each site gets its own circuit (Tor isolation key), every user sends the same headers,
- *      no cookies are kept, and "New identity" (or a timer) gives every site a fresh circuit.
- *   4. Checks: the exit IP each site sees is fetched through that site's own circuit and shown.
+ *   2. Content: pages are parsed inertly, stripped of scripts, frames and active content, and moved as DOM nodes
+ *      (never re-parsed HTML) into a sandboxed frame whose policy only allows data: resources. Veil watches that
+ *      frame and closes the page if anything in it loads or navigates outside the route.
+ *   3. Identity: on the Tor routes each site gets its own circuit (Tor isolation key, chosen per redirect hop),
+ *      every user sends the same headers, no cookies are kept, and "New identity" resets every window.
+ *   4. Checks: the exit IP each site sees is fetched with that site's isolation key and shown.
  * Inside the claude.ai artifact the network is blocked, so Veil explains itself and links to the live edition.
  */
 (() => {
@@ -38690,6 +38694,13 @@ const ACCEPT = {
   font: 'application/font-woff2;q=1.0,application/font-woff;q=0.9,*/*;q=0.8',
 };
 const CSP = "default-src 'none'; img-src data:; style-src 'unsafe-inline'; font-src data:; media-src 'none'; form-action 'none'; base-uri 'none'; frame-src 'none'";
+// Every page frame starts as this empty, locked document; Veil then moves the cleaned page in as DOM nodes. Nothing is
+// serialized back to HTML and parsed again, so markup that parses differently the second time (a "</style>" inside
+// fetched CSS, math/svg nesting tricks) can never turn into a live tag or link.
+const skeleton = quirks => (quirks ? '' : '<!doctype html>') + '<html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="' + CSP
+  + '"><meta http-equiv="x-dns-prefetch-control" content="off"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body></body></html>';
+const XLINK = 'http://www.w3.org/1999/xlink', SVGNS = 'http://www.w3.org/2000/svg';
+const SMIL = 'set,animate,animateMotion,animateTransform,animateColor';
 const LIMITS = { docBytes: 6 << 20, resBytes: 3 << 20, totalBytes: 18 << 20, css: 14, images: 90, cssAssets: 36, conc: 6 };
 const ROUTES = {
   chain: {
@@ -38710,7 +38721,8 @@ const ROUTES = {
     name: 'Nym', short: 'NYM', speed: 'Medium', tag: 'One network',
     hops: ['You', 'Nym entry', '3 mix layers', 'Nym exit', 'Site'],
     blurb: 'A mixnet: packets are shuffled, delayed and padded with cover traffic, which resists timing analysis better than Tor.',
-    sees: [['Your network', 'encrypted packets to a Nym gateway'], ['Nym exit', 'the site name, not you'], ['The site', 'a Nym exit IP']],
+    sees: [['Your network', 'encrypted packets to a Nym gateway'], ['Nym exit', 'the site name, not you'],
+      ['DNS', 'Quad9, Cloudflare or Google see the site name (encrypted DNS sent through the mixnet), not you'], ['The site', 'a Nym exit IP, the same one for every site this visit']],
   },
 };
 const TRY = [
@@ -38759,12 +38771,24 @@ function decodeText(bytes, ct) {
   }
   try { return new TextDecoder(cs || 'utf-8').decode(bytes); } catch (_) { return new TextDecoder('utf-8').decode(bytes); }
 }
-async function decompress(bytes, enc) {
+async function decompress(bytes, enc, max) {
   enc = String(enc || '').toLowerCase().trim();
   if (!enc || enc === 'identity') return bytes;
   if (!['gzip', 'deflate', 'x-gzip'].includes(enc) || typeof DecompressionStream === 'undefined') throw new Error('the site sent ' + enc + '-compressed data this browser cannot unpack');
-  const ds = new Blob([bytes]).stream().pipeThrough(new DecompressionStream(enc === 'x-gzip' ? 'gzip' : enc));
-  return new Uint8Array(await new Response(ds).arrayBuffer());
+  const r = new Blob([bytes]).stream().pipeThrough(new DecompressionStream(enc === 'x-gzip' ? 'gzip' : enc)).getReader();
+  const parts = [];
+  let n = 0;
+  for (;;) {   // a few KB of gzip can unpack to gigabytes, so stop at the same cap as the raw response
+    const { value, done } = await r.read();
+    if (done) break;
+    n += value.byteLength;
+    if (n > max) { try { r.cancel(); } catch (_) {} throw new Error('the response unpacks to more than ' + fmtB(max)); }
+    parts.push(value);
+  }
+  const out = new Uint8Array(n);
+  let o = 0;
+  for (const p of parts) { out.set(p, o); o += p.byteLength; }
+  return out;
 }
 function pickSrcset(ss, base) {
   const c = String(ss || '').split(/,\s+(?=\S)/).map(p => p.trim().split(/\s+/)).filter(p => p[0]).map(([u, d]) => ({ u, w: /w$/.test(d || '') ? parseFloat(d) : 0, x: /x$/.test(d || '') ? parseFloat(d) : 1 }));
@@ -38790,10 +38814,15 @@ function pool(n, jobs, onEach) {
 // ── content layer: inert parse → strip → collect resources ──
 function sanitize(doc, base, stats, links) {
   const kill = (sel, key) => doc.querySelectorAll(sel).forEach(n => { n.remove(); if (key) stats[key]++; });
+  // Veil's own markers (data-vl…, data-vh) must come from Veil: drop any the page brought, before anything trusts them
+  for (const el of doc.querySelectorAll('*')) for (const a of [...el.attributes]) if (/^data-v[lh]/i.test(a.name)) el.removeAttribute(a.name);
   doc.querySelectorAll('noscript').forEach(n => n.replaceWith(...n.childNodes));   // scripts never run, so show the no-script content
   kill('script', 'scripts');
   kill('iframe,frame,frameset,object,embed,applet,portal,fencedframe', 'frames');
   kill('base,meta,template,slot');
+  // SVG animation can rewrite an attribute after Veil has checked it (<set attributeName="href" to="https://…">
+  // turns a harmless <a> into a real link), so any animation aimed at a URL-bearing attribute goes
+  doc.querySelectorAll(SMIL).forEach(n => { if (/(^|:)(href|src|target)$/i.test((n.getAttribute('attributeName') || '').trim())) n.remove(); });
   doc.querySelectorAll('video,audio').forEach(n => {
     const d = doc.createElement('div');
     d.setAttribute('style', 'padding:14px;margin:8px 0;border:1px dashed #9995;border-radius:8px;font:13px system-ui;color:#777');
@@ -38819,21 +38848,21 @@ function sanitize(doc, base, stats, links) {
     }
   });
   doc.querySelectorAll('style').forEach(s => { if (!s.hasAttribute('data-vl-css')) styleTags.push(s); });
-  const BAD = /^(on|srcdoc$|ping$|formaction$|integrity$|nonce$|crossorigin$|referrerpolicy$|loading$|fetchpriority$|decoding$|target$|download$|autofocus$|http-equiv$|dynsrc$|lowsrc$)/i;
+  const BAD = /^(on|srcdoc$|ping$|formaction$|formtarget$|integrity$|nonce$|crossorigin$|referrerpolicy$|loading$|fetchpriority$|decoding$|target$|download$|autofocus$|http-equiv$|dynsrc$|lowsrc$)/i;
   for (const el of doc.querySelectorAll('*')) {
     for (const a of [...el.attributes]) {
       const v = a.value.trim();
       if (BAD.test(a.name)) { el.removeAttribute(a.name); continue; }
-      if (/^\s*(javascript|vbscript|data):/i.test(v) && /^(href|xlink:href|src|action|background|poster|cite|data)$/i.test(a.name) && !(el.localName === 'img' && /^data:image\//i.test(v))) el.removeAttribute(a.name);
+      if (/^\s*(javascript|vbscript|data):/i.test(v) && /^(href|xlink:href|src|action|background|poster|cite|data)$/i.test(a.name) && !((el.localName === 'img' || el.localName === 'image') && /^data:image\//i.test(v))) el.removeAttributeNode(a);
     }
-    if (el.hasAttribute('style') && /url\s*\(/i.test(el.getAttribute('style'))) styled.push(el);
+    if (el.hasAttribute('style') && /url\s*\(|image-set|src\s*\(|\\/i.test(el.getAttribute('style'))) styled.push(el);
     if (el.hasAttribute('background')) { el.removeAttribute('background'); }
   }
   // links: every navigation goes through Veil; the page itself can only jump to in-document fragments
   const here = new URL(base);
   doc.querySelectorAll('a[href], area[href], a[*|href]').forEach(a => {
-    const raw = a.getAttribute('href') || a.getAttributeNS('http://www.w3.org/1999/xlink', 'href') || '';
-    a.removeAttribute('href'); a.removeAttributeNS('http://www.w3.org/1999/xlink', 'href');
+    const raw = a.getAttribute('href') || a.getAttributeNS(XLINK, 'href') || '';
+    a.removeAttribute('href'); a.removeAttributeNS(XLINK, 'href');
     let u = abs(raw, base);
     if (!u) return;
     let p = new URL(u);
@@ -38864,10 +38893,17 @@ function sanitize(doc, base, stats, links) {
       imgs.push({ url: u });
     } else if (src && !/^data:image\//i.test(src)) img.removeAttribute('src');
   });
-  doc.querySelectorAll('image, use').forEach(n => {   // SVG references outside the document
-    const h = n.getAttribute('href') || n.getAttributeNS('http://www.w3.org/1999/xlink', 'href') || '';
-    if (h && !h.startsWith('#') && !/^data:image\//i.test(h)) { n.removeAttribute('href'); n.removeAttributeNS('http://www.w3.org/1999/xlink', 'href'); }
-  });
+  // Any other href (MathML links, SVG use/image/feImage, gradients…) may only point inside the document. HTML and
+  // MathML elements lose it outright (MathML href is a live link in some browsers); SVG keeps #fragment references.
+  for (const el of doc.querySelectorAll('[href], [*|href]')) {
+    if (el.hasAttribute('data-vh')) continue;
+    for (const a of [...el.attributes]) {
+      if (a.localName !== 'href') continue;
+      const v = a.value.trim();
+      if (el.namespaceURI === SVGNS && el.localName !== 'a' && (v.startsWith('#') || (el.localName === 'image' && /^data:image\//i.test(v)))) continue;
+      el.removeAttributeNode(a);
+    }
+  }
   return { css, styleTags, imgs, styled, icon };
 }
 
@@ -38876,7 +38912,11 @@ function sanitize(doc, base, stats, links) {
 const BLANK_GIF = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 const assetToken = (i, kind) => kind === 'font' ? 'local("vl-asset-' + i + '")' : 'url("' + BLANK_GIF + '#vl' + i + '")';
 function cssRefs(text, base, assets) {
-  return String(text).replace(/@import\s+(?:url\(\s*)?["']?[^"');\s]+["']?\s*\)?[^;]*;/gi, '')    // nested imports are dropped
+  return String(text)
+    .replace(/@import\b[^;{}]*(?:;|(?=[{}])|$)/gi, '')     // imports were inlined already (importsOf); any left, however written, are dropped
+    // a URL can also hide in an escaped function name (\75 rl(…) is url(…)), in image-set("…") or in src("…"):
+    // those become an unknown function, which the browser ignores (the page policy would block the load anyway)
+    .replace(/((?:[\w-]|\\[0-9a-fA-F]{1,6}\s?|\\[^\n\r\f0-9a-fA-F])+)\(/g, (m, name) => name.includes('\\') || /^(-webkit-)?image-set$|^src$/i.test(name) ? 'vl-blocked(' : m)
     .replace(/url\(\s*(["']?)([^"')]+)\1\s*\)/gi, (m, q, u) => {
       u = u.trim();
       if (/^data:/i.test(u) || u.startsWith('#')) return m;
@@ -38893,7 +38933,7 @@ function cssRefs(text, base, assets) {
 }
 function importsOf(text, base) {
   const out = [];
-  String(text).replace(/@import\s+(?:url\(\s*)?["']?([^"');\s]+)["']?\s*\)?([^;]*);/gi, (m, u, media) => { const a = abs(u, base); if (a) out.push({ url: a, media: media.trim() }); return m; });
+  String(text).replace(/@import\s*(?:url\(\s*)?["']?([^"');\s]+)["']?\s*\)?([^;{}]*);/gi, (m, u, media) => { const a = abs(u, base); if (a && /^https?:/.test(a)) out.push({ url: a, media: media.trim() }); return m; });
   return out.slice(0, 4);
 }
 
@@ -38905,7 +38945,7 @@ function launch(ctx) {
   let mode = ROUTES[store.get('mode', 'chain')] ? store.get('mode', 'chain') : 'chain';
   let rotateMin = +store.get('rotate', 0) || 0;
   const hist = [], fwd = [];
-  let cur = null, navSeq = 0, aborter = null, links = [], page = null, sideOpen = false;
+  let cur = null, navSeq = 0, aborter = null, page = null, sideOpen = false;
 
   ctx.css(CSS);
   root.innerHTML = `<div class="vl">
@@ -38943,20 +38983,26 @@ function launch(ctx) {
     routeChip();
   }
 
-  // ── fetch through the route, with the uniform headers and this site's isolation key ──
-  function isoKey(firstParty) { return 'veil|' + mode + '|' + SHARED.epoch + '|' + siteOf(firstParty); }
+  // ── fetch through the route, with the uniform headers and the isolation key of the site being visited ──
+  const isoKey = (m, epoch, host) => 'veil|' + m + '|' + epoch + '|' + siteOf(host);
   async function vfetch(url, o) {
     if (!net.api) throw new Error('offline');
     const u = new URL(url);
     const headers = Object.assign({}, UNIFORM, { Accept: ACCEPT[o.kind || 'doc'] }, o.headers || {});
     if (o.referer) { const r = new URL(o.referer); if (r.origin === u.origin) headers.Referer = r.origin + '/'; }
-    const res = await net.api.fetch(mode, u.href, {
-      method: o.method || 'GET', headers, body: o.body, isolationKey: isoKey(o.firstParty || u.hostname),
-      maxBytes: o.maxBytes || LIMITS.resBytes, timeoutMs: o.timeoutMs || (mode === 'chain' ? 180000 : 90000), signal: o.signal,
+    const res = await net.api.fetch(o.mode, u.href, {
+      method: o.method || 'GET', headers, body: o.body, isolationKey: o.key,
+      maxBytes: o.maxBytes || LIMITS.resBytes, timeoutMs: o.timeoutMs || (o.mode === 'chain' ? 180000 : 90000), signal: o.signal,
     });
-    if (page && o.count !== false) page.requests++;
-    const body = await decompress(res.body, header(res.headers, 'content-encoding'));
+    if (o.page) o.page.requests++;
+    const body = await decompress(res.body, header(res.headers, 'content-encoding'), o.maxBytes || LIMITS.resBytes);
     return { status: res.status, headers: res.headers, body, url: u.href };
+  }
+  // A page's stylesheets, images and fonts: same route and circuit as the page itself (its key is fixed when the
+  // load starts, so a timed rotation can't split one page across two exits), and HTTPS-only on HTTPS pages.
+  function sub(p, url, kind) {
+    if (/^http:/i.test(url) && /^https:/i.test(p.url)) url = 'https:' + url.slice(5);
+    return vfetch(url, { kind, mode: p.mode, key: p.key, page: p, signal: p.signal, referer: p.url });
   }
 
   // ── navigation ──
@@ -38972,6 +39018,7 @@ function launch(ctx) {
     if (!net.api) return home();
     let u;
     try { u = new URL(url); } catch (_) { return showError(url, 'That address is not valid.'); }
+    if (!/^https?:$/.test(u.protocol)) return showError(url, 'Veil only opens http and https addresses.');
     if (u.protocol === 'http:' && !o.allowHttp) {
       u.protocol = 'https:';     // HTTPS-only: the exit can read plain HTTP
       o.httpFallback = url;
@@ -38980,39 +39027,47 @@ function launch(ctx) {
     if (aborter) aborter.abort();
     aborter = new AbortController();
     const signal = aborter.signal;
+    const m = mode, epoch = SHARED.epoch;
     input.value = u.href;
     q('.vl-lock').innerHTML = u.protocol === 'https:' ? SVG.lock : SVG.unlock;
-    const fp = u.hostname;
-    page = { url: u.href, firstParty: fp, requests: 0, bytes: 0, stats: { scripts: 0, frames: 0, media: 0, forms: 0 }, title: '', started: Date.now() };
+    const p = page = { url: u.href, firstParty: u.hostname, key: isoKey(m, epoch, u.hostname), mode: m, epoch, signal, requests: 0, bytes: 0,
+      stats: { scripts: 0, frames: 0, media: 0, forms: 0 }, guard: { direct: 0, blocked: 0, stopped: '' }, title: '', started: Date.now() };
     renderSide();
     setProg(0.06);
     q('.b-reload').innerHTML = SVG.stop;
     try {
-      const lastLayer = net.api.routeLayers(mode).slice(-1)[0];
-      if ((net.api.layers()[lastLayer] || {}).state !== 'ready') setStatus('Bringing up ' + ROUTES[mode].name + '… (the first page takes longest)');
-      await net.api.open(mode);     // idempotent; rejects if any layer of the route failed (no fallback)
+      const lastLayer = net.api.routeLayers(m).slice(-1)[0];
+      if ((net.api.layers()[lastLayer] || {}).state !== 'ready') setStatus('Bringing up ' + ROUTES[m].name + '… (the first page takes longest)');
+      await net.api.open(m);     // idempotent; rejects if any layer of the route failed (no fallback)
       if (seq !== navSeq) return;
-      setStatus('Fetching ' + fp + ' over ' + ROUTES[mode].name);
+      setStatus('Fetching ' + u.hostname + ' over ' + ROUTES[m].name);
       setProg(0.18);
       let res, method = o.method || 'GET', body = o.body, target = u.href, hops = 0;
       for (;;) {
-        res = await vfetch(target, { method, body, headers: o.contentType ? { 'Content-Type': o.contentType } : null, firstParty: fp, maxBytes: LIMITS.docBytes, signal, referer: o.referer });
+        // Each hop goes out on the circuit of the site it is addressed to. Keying every hop to the first site would put
+        // all the sites reached through one redirector (a link shortener, a search-result bounce) on a single exit.
+        const host = new URL(target).hostname;
+        res = await vfetch(target, { mode: m, key: isoKey(m, epoch, host), page: p, method, body, headers: o.contentType ? { 'Content-Type': o.contentType } : null, maxBytes: LIMITS.docBytes, signal, referer: o.referer });
         if (seq !== navSeq) return;
         const loc = header(res.headers, 'location');
         if (res.status >= 300 && res.status < 400 && loc && hops < 8) {
           const nx = abs(loc, target);
           if (!nx) break;
-          hops++;
-          if (res.status === 303 || ((res.status === 301 || res.status === 302) && method === 'POST')) { method = 'GET'; body = undefined; }
           const nu = new URL(nx);
           if (nu.protocol === 'http:') nu.protocol = 'https:';
-          if (siteOf(nu.hostname) !== siteOf(fp)) setStatus('Redirected to ' + nu.hostname);
+          if (nu.protocol !== 'https:') break;
+          hops++;
+          if (res.status === 303 || ((res.status === 301 || res.status === 302) && method === 'POST')) { method = 'GET'; body = undefined; }
+          if (siteOf(nu.hostname) !== siteOf(host)) setStatus('Redirected to ' + nu.hostname);
           target = nu.href;
           continue;
         }
         break;
       }
-      page.url = target;
+      p.url = target;
+      p.firstParty = new URL(target).hostname;
+      p.key = isoKey(m, epoch, p.firstParty);       // the page and everything it loads use the final site's circuit
+      q('.vl-lock').innerHTML = /^https:/.test(target) ? SVG.lock : SVG.unlock;
       input.value = target;
       if (!o.fromHistory) {
         if (cur) hist.push(cur);
@@ -39020,7 +39075,7 @@ function launch(ctx) {
       }
       cur = { url: target, method, body, contentType: o.contentType };
       updateNavButtons();
-      await show(res, target, seq, signal);
+      await show(p, res, seq);
     } catch (e) {
       if (seq !== navSeq) return;
       if (o.httpFallback && !o.triedHttp) {
@@ -39033,17 +39088,35 @@ function launch(ctx) {
     }
   }
 
-  async function show(res, url, seq, signal) {
+  // Non-HTML responses get a small page built from DOM nodes too (text set as text, never parsed as markup).
+  function plainDoc(title, build) {
+    const doc = document.implementation.createHTMLDocument(title || '');   // no browsing context: nothing in it loads
+    build(doc, doc.body);
+    return doc;
+  }
+  async function show(p, res, seq) {
+    const url = p.url;
     const ct = header(res.headers, 'content-type') || '';
     const type = ct.split(';')[0].trim().toLowerCase();
-    page.bytes += res.body.byteLength;
+    p.bytes += res.body.byteLength;
     if (res.status >= 400 && !/html/.test(type)) return showError(url, 'The site answered ' + res.status + '.');
     if (/^image\//.test(type)) {
-      return render(`<!doctype html><html><head><meta http-equiv="Content-Security-Policy" content="${CSP}"><title>${esc(url.split('/').pop())}</title></head><body style="margin:0;display:grid;place-items:center;min-height:100vh;background:#111"><img style="max-width:100%" src="data:${esc(type)};base64,${b64(res.body)}"></body></html>`, url, [], []);
+      return render(p, plainDoc(url.split('/').pop(), (d, b) => {
+        b.setAttribute('style', 'margin:0;display:grid;place-items:center;min-height:100vh;background:#111');
+        const img = d.createElement('img');
+        img.setAttribute('style', 'max-width:100%');
+        img.setAttribute('src', 'data:' + type + ';base64,' + b64(res.body));
+        b.append(img);
+      }), [], [], []);
     }
     if (!/html|xml/.test(type) || /^(application\/(json|javascript)|text\/plain)/.test(type)) {
       if (/^text\/|json|javascript|xml/.test(type) || !type) {
-        return render(`<!doctype html><html><head><meta http-equiv="Content-Security-Policy" content="${CSP}"></head><body><pre style="white-space:pre-wrap;font:12.5px/1.5 ui-monospace,monospace;padding:12px">${esc(decodeText(res.body, ct).slice(0, 400000))}</pre></body></html>`, url, [], []);
+        return render(p, plainDoc('', (d, b) => {
+          const pre = d.createElement('pre');
+          pre.setAttribute('style', 'white-space:pre-wrap;font:12.5px/1.5 ui-monospace,monospace;padding:12px');
+          pre.textContent = decodeText(res.body, ct).slice(0, 400000);
+          b.append(pre);
+        }), [], [], []);
       }
       return saveOffer(url, type, res.body);
     }
@@ -39051,119 +39124,170 @@ function launch(ctx) {
     setProg(0.35);
     const text = decodeText(res.body, ct);
     const doc = new DOMParser().parseFromString(text, 'text/html');     // inert: nothing runs, nothing loads
-    links = [];
-    const found = sanitize(doc, url, page.stats, links);
-    page.title = (doc.title || new URL(url).hostname).trim().slice(0, 120);
+    const links = [];                                                   // this page's link table (the old page keeps its own)
+    const found = sanitize(doc, url, p.stats, links);
+    p.title = (doc.title || new URL(url).hostname).trim().slice(0, 120);
     // stylesheets first (they decide the layout), then render, then images stream in
     const assets = { list: [], index: new Map() };
     const sheets = found.css;
     let done = 0;
-    setStatus('Fetching ' + sheets.length + ' stylesheet' + (sheets.length === 1 ? '' : 's') + ' over ' + ROUTES[mode].name);
+    const wrap = (media, css) => (media ? '@media ' + media + '{' : '') + css + (media ? '}' : '') + '\n';
+    setStatus('Fetching ' + plural(sheets.length, 'stylesheet') + ' over ' + ROUTES[p.mode].name);
     await pool(LIMITS.conc, sheets.map(s => async () => {
       if (seq !== navSeq) return;
-      const r = await vfetch(s.url, { kind: 'css', firstParty: page.firstParty, signal, referer: url });
+      const r = await sub(p, s.url, 'css');
       if (r.status >= 400) return;
       let cssText = decodeText(r.body, header(r.headers, 'content-type'));
       for (const im of importsOf(cssText, s.url)) {
         try {
-          const ri = await vfetch(im.url, { kind: 'css', firstParty: page.firstParty, signal, referer: url });
-          if (ri.status < 400) cssText = (im.media ? '@media ' + im.media + '{' : '') + cssRefs(decodeText(ri.body), im.url, assets) + (im.media ? '}' : '') + '\n' + cssText;
+          const ri = await sub(p, im.url, 'css');
+          if (ri.status < 400) cssText = wrap(im.media, cssRefs(decodeText(ri.body), im.url, assets)) + cssText;
         } catch (_) {}
       }
-      page.bytes += r.body.byteLength;
-      s.el.textContent = cssRefs(cssText, s.url, assets);
+      p.bytes += r.body.byteLength;
+      s.el.textContent = cssRefs(cssText, s.url, assets);      // text, not markup: a "</style>" in here stays CSS
     }), () => { done++; setProg(0.35 + 0.35 * done / Math.max(1, sheets.length)); });
     if (seq !== navSeq) return;
     for (const s of found.styleTags) {
       let t = s.textContent;
       for (const im of importsOf(t, url)) {
         try {
-          const ri = await vfetch(im.url, { kind: 'css', firstParty: page.firstParty, signal, referer: url });
-          if (ri.status < 400) t = (im.media ? '@media ' + im.media + '{' : '') + decodeText(ri.body) + (im.media ? '}' : '') + '\n' + t;
+          const ri = await sub(p, im.url, 'css');
+          if (ri.status < 400) t = wrap(im.media, cssRefs(decodeText(ri.body), im.url, assets)) + t;
         } catch (_) {}
       }
       s.textContent = cssRefs(t, url, assets);
     }
     found.styled.forEach((el, i) => { el.setAttribute('style', cssRefs(el.getAttribute('style'), url, assets)); el.setAttribute('data-vl-sa', String(i)); });
-    const headBits = `<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="${CSP}"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width,initial-scale=1">`;
-    doc.head.insertAdjacentHTML('afterbegin', headBits);
-    render('<!doctype html>' + doc.documentElement.outerHTML, url, found.imgs, assets.list);
+    if (seq !== navSeq) return;
+    render(p, doc, found.imgs, assets.list, links);
   }
 
-  function render(html, url, imgs, cssAssets) {
+  const frameDoc = f => { try { return f.contentDocument; } catch (_) { return null; } };
+  function render(p, doc, imgs, cssAssets, links) {
     const seq = navSeq;
     const f = document.createElement('iframe');
     f.className = 'vl-frame';
     f.setAttribute('sandbox', 'allow-same-origin allow-forms');   // no allow-scripts: page code can never run. allow-forms only
     // lets the submit event fire so Veil can take it; the page policy (form-action 'none') still blocks any native submission.
     f.setAttribute('referrerpolicy', 'no-referrer');
-    f.setAttribute('title', page ? page.title : 'page');
-    f.srcdoc = html;
+    f.setAttribute('title', p.title || 'page');
+    f.srcdoc = skeleton(doc.compatMode === 'BackCompat');
     view.classList.add('page');
     view.replaceChildren(f);
-    ctx.setTitle((page && page.title ? page.title + ' — ' : '') + 'Veil');
+    ctx.setTitle((p.title ? p.title + ' — ' : '') + 'Veil');
+    let live = null;
     f.addEventListener('load', () => {
-      if (seq !== navSeq) return;
-      wire(f);
-      fill(f, url, imgs, cssAssets, seq);
-    }, { once: true });
+      if (!f.isConnected) return;
+      const d = frameDoc(f);
+      if (!live) {
+        if (seq !== navSeq || p !== page) return;
+        if (!d || d.URL !== 'about:srcdoc' || !d.body) return stopPage(f, p, 'its frame did not open as the empty, locked page Veil asked for');
+        live = d;
+        adopt(d, doc);
+        guard(f, d, p, links);
+        fill(f, d, p, imgs, cssAssets, seq);
+        return;
+      }
+      // The frame loads exactly once. Any later load means something in the page navigated it, which Veil never does.
+      if (p === page) stopPage(f, p, 'something in the page tried to navigate its frame');
+      else f.remove();       // an old page still on screen while the next one loads: just take it down
+    });
     renderSide();
     checkExit();
   }
+  // Move the cleaned page into the live frame as nodes. The skeleton's policy is already in force when they arrive.
+  function adopt(d, doc) {
+    for (const a of [...doc.documentElement.attributes]) { try { d.documentElement.setAttributeNS(a.namespaceURI, a.name, a.value); } catch (_) {} }
+    for (const n of [...doc.head.childNodes]) d.head.appendChild(d.importNode(n, true));
+    d.documentElement.replaceChild(d.importNode(doc.body || doc.createElement('body'), true), d.body);
+  }
+  // Resources the frame fetched by itself. Everything Veil shows is inlined as data:, so this should always be 0.
+  function directLoads(f) {
+    try { return [...f.contentWindow.performance.getEntriesByType('resource')].filter(e => /^(https?|wss?):/i.test(e.name)).length; } catch (_) { return 0; }
+  }
+  function doneStatus(f, p) {
+    const g = p.guard;
+    g.direct = directLoads(f);
+    if (g.direct) return stopPage(f, p, 'the page loaded ' + plural(g.direct, 'resource') + ' without going through Veil');
+    setStatus('Loaded over ' + ROUTES[p.mode].name + ' · ' + plural(p.requests, 'request') + ' · 0 direct' + (g.blocked ? ' · ' + g.blocked + ' blocked by the page policy' : ''), 'ok');
+  }
+  // Close a page that did something Veil didn't ask for. In the networked edition the page-wide policy also refuses
+  // to let any frame navigate to a real address, so this is the second wall, and it makes the attempt visible.
+  function stopPage(f, p, why) {
+    if (p !== page) return;
+    navSeq++;
+    if (aborter) aborter.abort();
+    p.guard.stopped = why;
+    try { f.remove(); } catch (_) {}
+    view.classList.remove('page');
+    let host = p.url;
+    try { host = new URL(p.url).hostname; } catch (_) {}
+    view.innerHTML = `<div class="vl-msg"><h2>Veil closed ${esc(host)}</h2><p>While showing this page, ${esc(why)}. Veil watches every page frame and closes it the moment anything in it loads or navigates outside the route.</p>
+      <div class="row"><button class="os-btn primary b-retry">Load it again</button><button class="os-btn b-home">Start page</button></div></div>`;
+    q('.b-retry').onclick = () => go(p.url, { fromHistory: true });
+    q('.b-home').onclick = home;
+    setProg(null); q('.b-reload').innerHTML = SVG.reload;
+    setStatus('Stopped: ' + why, 'bad');
+    renderSide();
+  }
 
   // fill images and CSS assets into the live page as they arrive (data: only, per the page policy)
-  function fill(f, url, imgs, cssAssets, seq) {
-    const d = f.contentDocument;
-    if (!d) return;
+  function fill(f, d, p, imgs, cssAssets, seq) {
     const total = imgs.length + cssAssets.length;
-    if (!total) { setStatus('Loaded over ' + ROUTES[mode].name + ' · ' + plural(page.requests, 'request') + ', 0 direct', 'ok'); return; }
-    let got = 0, spent = 0;
-    setStatus('Loading ' + total + ' images and fonts over ' + ROUTES[mode].name);
+    if (!total) return doneStatus(f, p);
+    let spent = 0;
+    setStatus('Loading ' + total + ' images and fonts over ' + ROUTES[p.mode].name);
     const jobs = [];
     imgs.forEach((im, i) => jobs.push(async () => {
       if (seq !== navSeq || spent > LIMITS.totalBytes) return;
-      const r = await vfetch(im.url, { kind: 'img', firstParty: page.firstParty, referer: url });
+      const r = await sub(p, im.url, 'img');
       if (r.status >= 400 || seq !== navSeq) return;
-      spent += r.body.byteLength; page.bytes += r.body.byteLength;
+      spent += r.body.byteLength; p.bytes += r.body.byteLength;
       const el = d.querySelector('[data-vl="' + i + '"]');
       if (el) el.setAttribute('src', 'data:' + guessType(im.url, header(r.headers, 'content-type'), 'img') + ';base64,' + b64(r.body));
     }));
     cssAssets.forEach((a, i) => jobs.push(async () => {
       if (seq !== navSeq || spent > LIMITS.totalBytes) return;
-      const r = await vfetch(a.url, { kind: a.kind, firstParty: page.firstParty, referer: url });
+      const r = await sub(p, a.url, a.kind);
       if (r.status >= 400 || seq !== navSeq) return;
-      spent += r.body.byteLength; page.bytes += r.body.byteLength;
+      spent += r.body.byteLength; p.bytes += r.body.byteLength;
       const data = 'url("data:' + guessType(a.url, header(r.headers, 'content-type'), a.kind) + ';base64,' + b64(r.body) + '")';
       const token = assetToken(i, a.kind);
       d.querySelectorAll('style').forEach(s => { if (s.textContent.includes(token)) s.textContent = s.textContent.split(token).join(data); });
       d.querySelectorAll('[data-vl-sa]').forEach(el => { const v = el.getAttribute('style') || ''; if (v.includes(token)) el.setAttribute('style', v.split(token).join(data)); });
     }));
-    pool(LIMITS.conc, jobs, n => {
-      got = n;
+    pool(LIMITS.conc, jobs, got => {
       if (seq !== navSeq) return;
       setProg(got < total ? 0.7 + 0.3 * got / total : null);
-      setStatus(got < total ? 'Images and fonts ' + got + '/' + total + ' · ' + fmtB(page.bytes) : 'Loaded over ' + ROUTES[mode].name + ' · ' + plural(page.requests, 'request') + ', 0 direct', got < total ? '' : 'ok');
+      if (got < total) setStatus('Images and fonts ' + got + '/' + total + ' · ' + fmtB(p.bytes));
+      else doneStatus(f, p);
       renderSide();
     });
   }
 
-  function wire(f) {
-    const d = f.contentDocument;
-    if (!d) return;
+  // Every way the page could act: links, forms, drops. Veil takes each one, so the page itself never navigates.
+  function guard(f, d, p, links) {
+    const linkOf = e => {
+      for (const n of (e.composedPath ? e.composedPath() : [e.target])) if (n && n.nodeType === 1 && (n.localName === 'a' || n.localName === 'area')) return n;
+      return null;
+    };
     d.addEventListener('click', e => {
-      const a = e.target && e.target.closest && e.target.closest('[data-vh]');
+      const a = linkOf(e);
       if (!a) return;
-      e.preventDefault(); e.stopPropagation();
-      const t = links[+a.getAttribute('data-vh')];
-      if (!t) return;
+      e.preventDefault(); e.stopPropagation();         // any link, rewritten or not, is Veil's to follow or ignore
+      const t = a.hasAttribute('data-vh') ? links[+a.getAttribute('data-vh')] : null;
+      if (!t) return;                                   // not a link Veil made: never follow it
       if (t.startsWith('#')) {
-        const id = decodeURIComponent(t.slice(1));
+        let id = t.slice(1);
+        try { id = decodeURIComponent(id); } catch (_) {}
         const el = d.getElementById(id) || d.getElementsByName(id)[0];
         if (el) el.scrollIntoView();
         return;
       }
-      go(t, { referer: cur && cur.url });
+      go(t, { referer: p.url });
     }, true);
+    d.addEventListener('auxclick', e => { if (linkOf(e)) { e.preventDefault(); e.stopPropagation(); } }, true);
     d.addEventListener('submit', e => {
       e.preventDefault(); e.stopPropagation();
       const form = e.target;
@@ -39172,9 +39296,13 @@ function launch(ctx) {
       const params = new URLSearchParams();
       for (const [k, v] of fd) { if (typeof v === 'string') params.append(k, v); }
       const action = form.getAttribute('data-vl-action'), method = form.getAttribute('data-vl-method');
-      if (method === 'post') go(action, { method: 'POST', body: params.toString(), contentType: 'application/x-www-form-urlencoded', referer: cur && cur.url });
-      else { const u = new URL(action); u.search = params.toString(); go(u.href, { referer: cur && cur.url }); }
+      if (!action) return;
+      if (method === 'post') go(action, { method: 'POST', body: params.toString(), contentType: 'application/x-www-form-urlencoded', referer: p.url });
+      else { const u = new URL(action); u.search = params.toString(); go(u.href, { referer: p.url }); }
     }, true);
+    d.addEventListener('dragover', e => e.preventDefault(), true);                     // a dropped link or file must not
+    d.addEventListener('drop', e => { e.preventDefault(); e.stopPropagation(); }, true);   // navigate the frame either
+    d.addEventListener('securitypolicyviolation', () => { p.guard.blocked++; }, true);   // a load the cleaner missed and the policy stopped
     d.addEventListener('keydown', e => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'l') { e.preventDefault(); input.focus(); input.select(); }
     });
@@ -39209,6 +39337,7 @@ function launch(ctx) {
   function hopsHTML(r) { return '<div class="hops">' + r.hops.map((h, i) => `<span class="hop${i === 0 ? ' you' : i === r.hops.length - 1 ? ' site' : ''}">${esc(h)}</span>`).join('<i>→</i>') + '</div>'; }
   function home() {
     navSeq++; page = null; cur = null;
+    if (aborter) { aborter.abort(); aborter = null; }
     view.classList.remove('page');
     ctx.setTitle('Veil');
     input.value = '';
@@ -39225,8 +39354,9 @@ function launch(ctx) {
         <div><div class="vl-label">Who sees what on ${esc(ROUTES[mode].name)}</div><dl class="vl-sees">${ROUTES[mode].sees.map(([a, b]) => `<dt>${esc(a)}</dt><dd>${esc(b)}</dd>`).join('')}</dl></div>
         <div><div class="vl-label">Always on</div><ul class="vl-always">
           <li><b>No site code.</b> Scripts, frames and plugins are removed before a page is shown.</li>
-          <li><b>No direct connections.</b> Pages may only load data the route already fetched; anything else is blocked.</li>
-          <li><b>One circuit per site.</b> Sites can’t link your visits by exit IP.</li>
+          <li><b>No direct connections.</b> Pages may only load data the route already fetched; anything else is blocked, and Veil closes a page that tries.</li>
+          ${mode === 'nym' ? '<li><b>One exit for every site on Nym.</b> Sites could link your visits by IP; Nym → Tor and Tor give each site its own circuit.</li>'
+            : '<li><b>One circuit per site.</b> Sites can’t link your visits by exit IP.</li>'}
           <li><b>Same headers as every Veil user</b>, no cookies kept, no referrer across sites.</li>
           <li><b>MAC address:</b> never leaves your Wi-Fi router, so no site can see it. Phones and laptops randomize it per network.</li>
         </ul></div>
@@ -39252,52 +39382,57 @@ function launch(ctx) {
   }
 
   // ── identity panel ──
+  // The exit a site sees, asked for with the page's own isolation key. Tor stops using a circuit for new streams after
+  // about 10 minutes, so an answer is kept that long; a failed check is retried after a minute.
+  const exitFresh = e => e && !e.pending && Date.now() - e.at < (e.error ? 60000 : 10 * 60000);
   async function checkExit() {
     if (!net.api || !page) return;
-    const key = isoKey(page.firstParty), p = page;
-    if (SHARED.exits.has(key)) { renderSide(); return; }
+    const p = page, key = p.key;
+    const e = SHARED.exits.get(key);
+    if (e && (e.pending || exitFresh(e))) { renderSide(); return; }
     SHARED.exits.set(key, { pending: true });
-    try {
-      const e = await net.api.exit(mode, key);
-      SHARED.exits.set(key, Object.assign(e, { at: Date.now() }));
-    } catch (err) {
-      SHARED.exits.set(key, { error: String(err && err.message || err) });
-    }
-    if (p === page) renderSide();
+    let r;
+    try { r = Object.assign(await net.api.exit(p.mode, key), { at: Date.now() }); }
+    catch (err) { r = { error: String(err && err.message || err), at: Date.now() }; }
+    if (SHARED.exits.get(key) && SHARED.exits.get(key).pending) SHARED.exits.set(key, r);
+    ctx.bus.emit('veil:exit', key);       // every window showing this site updates, not just the one that asked
   }
   function renderSide() {
-    const r = ROUTES[mode];
+    const m = page ? page.mode : mode, r = ROUTES[m], perSite = m !== 'nym';
     let exitLine = '<span class="dim">open a page to see it</span>', exitTxt = '';
     if (page && net.api) {
-      const e = SHARED.exits.get(isoKey(page.firstParty));
-      if (!e || e.pending) { exitLine = '<span class="dim">checking through this site’s circuit…</span>'; exitTxt = 'exit: checking'; }
+      const e = SHARED.exits.get(page.key);
+      if (!e || e.pending) { exitLine = '<span class="dim">checking with this site’s isolation key…</span>'; exitTxt = 'exit: checking'; }
       else if (e.error) { exitLine = '<span class="bad">could not check (' + esc(e.error) + ')</span>'; exitTxt = 'exit: unverified'; }
-      else {
-        const good = mode === 'nym' ? !!e.ip : e.isTor;
-        exitLine = `<b class="mono">${esc(e.ip)}</b> ${good ? `<span class="ok">✓ ${mode === 'nym' ? 'Nym exit' : 'Tor exit, verified by check.torproject.org'}</span>` : '<span class="bad">✗ not a Tor exit</span>'}`;
-        exitTxt = 'exit ' + e.ip + (good ? ' ✓' : ' ✗');
+      else if (!perSite) {
+        exitLine = `<b class="mono">${esc(e.ip)}</b> <span class="dim">the Nym exit; no outside service can confirm it the way check.torproject.org confirms Tor exits</span>`;
+        exitTxt = 'exit ' + e.ip;
+      } else {
+        exitLine = `<b class="mono">${esc(e.ip)}</b> ${e.isTor ? '<span class="ok">✓ a Tor exit, confirmed by check.torproject.org</span>' : '<span class="bad">✗ not a Tor exit</span>'}`;
+        exitTxt = 'exit ' + e.ip + (e.isTor ? ' ✓' : ' ✗');
       }
     }
     ex.textContent = exitTxt;
-    const s = page ? page.stats : null;
+    const s = page ? page.stats : null, g = page ? page.guard : null;
     const age = Math.round((Date.now() - SHARED.at) / 60000);
+    const ident = page ? ' Identity #' + page.epoch + (page.epoch === SHARED.epoch ? ', ' + (age < 1 ? 'new' : age + ' min old') : ' (the next page uses #' + SHARED.epoch + ')') + '.' : '';
     side.innerHTML = `<div class="sh"><b>What this site sees</b><span class="sp"></span><button class="os-btn icon ghost sm b-closeside" aria-label="Close">${SVG.x}</button></div>
       <dl class="kv">
         <dt>Site</dt><dd>${page ? esc(siteOf(page.firstParty)) : '<span class="dim">none</span>'}</dd>
         <dt>Your IP, as the site sees it</dt><dd>${exitLine}</dd>
         <dt>Route</dt><dd>${hopsHTML(r)}</dd>
-        <dt>Circuit</dt><dd>${page ? 'Its own, shared with no other site. Identity #' + SHARED.epoch + ', ' + (age < 1 ? 'new' : age + ' min old') : '—'}</dd>
-        <dt>Requests</dt><dd>${page ? page.requests + (page.requests === 1 ? ' request' : ' requests') + ' through the route, <b>0 direct</b> (pages can only use data Veil already fetched)' : '—'}</dd>
+        <dt>Circuit</dt><dd>${page ? (perSite ? 'Its own Tor circuit, shared with no other site.' : '<span class="bad">Shared with every site.</span> The Nym route has one exit for the whole visit, so sites could link your visits by IP; Nym → Tor and Tor give each site its own circuit.') + ident : '—'}</dd>
+        <dt>Requests</dt><dd>${page ? plural(page.requests, 'request') + ' through the route. Direct from the page: <b>' + (g.stopped ? 'stopped' : g.direct) + '</b>' + (g.blocked ? ', ' + g.blocked + ' blocked by the page policy' : '') + '. Veil watches the page frame and closes it if anything loads or navigates outside the route.' : '—'}</dd>
         <dt>Removed</dt><dd>${s ? `${s.scripts} scripts, ${s.frames} frames or plugins, ${s.media} media players` : '—'}</dd>
         <dt>JavaScript</dt><dd>Never runs</dd>
         <dt>Cookies</dt><dd>None kept, so every page load is a stranger</dd>
-        <dt>Headers</dt><dd class="mono small">${Object.entries(UNIFORM).map(([k, v]) => esc(k) + ': ' + esc(v)).join('<br>')}<br><span class="dim">Identical for every Veil user</span></dd>
-        <dt>DNS</dt><dd>${mode === 'nym' ? 'Resolved by the Nym exit' : 'Resolved by the Tor exit'}, never by your network</dd>
+        <dt>Headers</dt><dd class="mono small">${Object.entries(UNIFORM).map(([k, v]) => esc(k) + ': ' + esc(v)).join('<br>')}<br><span class="dim">Every Veil user sends exactly these. The connection itself (TLS and HTTP details) comes from ${perSite ? 'tor-js' : 'the Nym client'}, so a site can still tell Veil apart from Tor Browser.</span></dd>
+        <dt>DNS</dt><dd>${perSite ? 'Looked up by the Tor exit, never by your network' : 'Looked up over encrypted DNS (Quad9, Cloudflare or Google) through the mixnet: they see the site name, not you'}</dd>
         <dt>MAC address</dt><dd>Never leaves your local network</dd>
       </dl>
       <div class="vl-label">Rotate identity</div>
       <div class="os-seg b-rot">${[0, 5, 15, 30].map(m => `<button data-m="${m}" class="${m === rotateMin ? 'on' : ''}">${m ? m + ' min' : 'Off'}</button>`).join('')}</div>
-      <p class="dim small">${net.api && !net.api.rotatesInPlace(mode) ? 'On Nym, a new exit needs a page reload.' : 'Each rotation gives every site a fresh circuit and exit.'}</p>`;
+      <p class="dim small">${net.api && !net.api.rotatesInPlace(mode) ? 'On Nym, a new exit needs a page reload.' : 'A timed rotation gives the next page you open a fresh circuit; the page on screen keeps the one it loaded with. New identity resets every Veil window.'}</p>`;
     side.querySelector('.b-closeside').onclick = () => toggleSide(false);
     side.querySelectorAll('.b-rot button').forEach(b => b.onclick = () => { rotateMin = +b.dataset.m; store.set('rotate', rotateMin); renderSide(); });
   }
@@ -39311,10 +39446,18 @@ function launch(ctx) {
       return;
     }
     SHARED.epoch++; SHARED.at = Date.now();
-    ctx.bus.emit('veil:identity', SHARED.epoch);
-    if (!auto) ctx.notify('New identity', 'Every site now gets a fresh circuit and exit.');
-    renderSide();
-    if (page) checkExit();
+    if (!auto) SHARED.exits.clear();
+    ctx.bus.emit('veil:identity', { epoch: SHARED.epoch, auto: !!auto });
+    if (!auto) ctx.notify('New identity', 'Every Veil window was reset. Each site now gets a fresh circuit and exit.');
+  }
+  // Manual New identity ends the old one everywhere, like Tor Browser closing every tab: loads stop, history goes.
+  // A timed rotation only changes what the next page uses, so no single page is ever split across two exits.
+  function onIdentity(ev) {
+    if (ev && ev.auto) { renderSide(); return; }
+    navSeq++;
+    if (aborter) { aborter.abort(); aborter = null; }
+    hist.length = 0; fwd.length = 0; cur = null;
+    home();
   }
 
   // ── chrome wiring ──
@@ -39340,7 +39483,8 @@ function launch(ctx) {
     else if (e.altKey && e.key === 'ArrowLeft') { e.preventDefault(); q('.b-back').click(); }
     else if (e.altKey && e.key === 'ArrowRight') { e.preventDefault(); q('.b-fwd').click(); }
   });
-  ctx.bus.on('veil:identity', () => renderSide());
+  ctx.bus.on('veil:identity', onIdentity);
+  ctx.bus.on('veil:exit', key => { if (page && page.key === key) renderSide(); });
   ctx.setInterval(() => { if (rotateMin && Date.now() - SHARED.at >= rotateMin * 60000) newIdentity(true); }, 15000);
   ctx.on('close', () => { navSeq++; if (aborter) aborter.abort(); if (offNet) offNet(); });
 
@@ -39447,7 +39591,7 @@ SwarmOS.register({
     const fit = () => vl.classList.toggle('mob', ctx.isMobile || ctx.width < 760);
     fit(); ctx.on('resize', fit);
   },
-  _test: { sanitize, cssRefs, siteOf, pickSrcset, toB64: b64, CSP, UNIFORM },
+  _test: { sanitize, cssRefs, importsOf, siteOf, pickSrcset, toB64: b64, CSP, UNIFORM, skeleton, decompress },
 });
 })();
 
@@ -40316,8 +40460,8 @@ function hiveApp(ctx) {
     detail.innerHTML = `<div class="grab"></div><div class="dh"><span class="os-icon" style="--ic:#ffb43b">${ICON_HIVE}</span><div><b>The orchestrator</b><span>Claude Opus 5.5</span></div></div>
       <p class="lede">I wrote the <b>kernel</b> (processes, window manager, virtual filesystem, dialogs), the <b>shell</b> you're looking at, and an app contract. Then I spawned <b>${agentApps.length} Claude Fable 5.2 agents</b> in parallel. Each one built a single app against the contract and tested it in headless Chrome, and I integrated everything into one HTML file.</p>
       <p class="lede">The swarm ran for ${B && B.swarm && B.swarm.minutes ? 'about ' + B.swarm.minutes + ' minutes' : 'a little over an hour'}, until every agent hit the Fable usage limit. Nine apps were finished by then. Terminal and Forge had tested cores but unfinished windows, so I wrote the rest of their UI${B && B.apps && B.apps.terminal && B.apps.forge ? ' (' + S.fmtNum(B.apps.terminal.orchLines + B.apps.forge.orchLines) + ' lines)' : ''}. Each app's panel says who wrote what.</p>
-      ${B && B.extra && B.extra.veil ? '<p class="lede">Added later: <b>Veil</b>, a private browser that routes through the Nym mixnet and Tor. I wrote it after the swarm (' + S.fmtNum(B.extra.veil.lines) + ' lines), and a Fable 5.2 agent will review it once the usage limit resets.</p>' : ''}
-      <dl class="kv"><dt>Kernel</dt><dd>${k ? S.fmtNum(k) + ' lines' : '—'}</dd><dt>Shell + built-in apps</dt><dd>${sh ? S.fmtNum(sh) + ' lines' : '—'}</dd><dt>Agent-written apps</dt><dd>${B ? S.fmtNum(B.totals.agentLines) + ' lines' : '—'}</dd>${B && B.totals.orchAppLines ? '<dt>Orchestrator code in apps</dt><dd>' + S.fmtNum(B.totals.orchAppLines) + ' lines</dd>' : ''}${B && B.totals.extraLines ? '<dt>Added later (Veil)</dt><dd>' + S.fmtNum(B.totals.extraLines) + ' lines</dd>' : ''}<dt>Total</dt><dd>${totalLines ? S.fmtNum(totalLines) + ' lines' : '—'}</dd><dt>Build</dt><dd>${B && B.date ? new Date(B.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) : 'dev'}</dd><dt>Dependencies</dt><dd>none</dd><dt>Network</dt><dd>web fonts only</dd></dl>
+      ${B && B.extra && B.extra.veil ? '<p class="lede">Added later: <b>Veil</b>, a private browser that routes through the Nym mixnet and Tor. I wrote it after the swarm (' + S.fmtNum(B.extra.veil.lines) + ' lines). On Nov 19 a Fable 5.2 agent that had not seen the code reviewed it and found 13 problems. Three were critical: a hostile page could slip a real link past the cleaner and open the site directly. All 13 are addressed, and its attack pages now run as Veil’s regression tests.</p>' : ''}
+      <dl class="kv"><dt>Kernel</dt><dd>${k ? S.fmtNum(k) + ' lines' : '—'}</dd><dt>Shell + built-in apps</dt><dd>${sh ? S.fmtNum(sh) + ' lines' : '—'}</dd><dt>Agent-written apps</dt><dd>${B ? S.fmtNum(B.totals.agentLines) + ' lines' : '—'}</dd>${B && B.totals.orchAppLines ? '<dt>Orchestrator code in apps</dt><dd>' + S.fmtNum(B.totals.orchAppLines) + ' lines</dd>' : ''}${B && B.totals.extraLines ? '<dt>Added later (Veil)</dt><dd>' + S.fmtNum(B.totals.extraLines) + ' lines</dd>' : ''}<dt>Total</dt><dd>${totalLines ? S.fmtNum(totalLines) + ' lines' : '—'}</dd><dt>Build</dt><dd>${B && B.date ? new Date(B.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) : 'dev'}</dd><dt>Dependencies</dt><dd>${window.__VEIL_NET_PENDING__ ? 'none in the OS; Veil’s networked edition vendors tor-js and Nym' : 'none'}</dd><dt>Network</dt><dd>${window.__VEIL_NET_PENDING__ ? 'Veil’s routes only (fonts are self-hosted)' : 'web fonts only'}</dd></dl>
       <p class="lede">Select any agent to see what it built. The OS's own source is mounted read-mostly at <b>/usr/src/swarmos</b>: open it in Files, or run <b>wc -l /usr/src/swarmos/apps/*.js</b> in Terminal.</p>
       <div class="acts"><button class="os-btn primary b-src" type="button">${I.src}Browse the source</button></div>`;
     const b = detail.querySelector('.b-src'); if (b) b.onclick = () => ctx.open('/usr/src/swarmos');
@@ -40544,13 +40688,13 @@ const IC = {
 const agentLines = () => AGENTS.filter(id => OS.app(id)).map(id => { const a = OS.app(id); return '| ' + a.name + ' | ' + (a.tagline || '') + ' |'; }).join('\n');
 const WELCOME = () => `# Welcome to SWARM OS
 
-SWARM OS is a desktop operating system that runs entirely inside one HTML file. There's no server and no framework, and nothing comes from the network except the fonts.
+SWARM OS is a desktop operating system that runs entirely inside one HTML file. There's no server and no framework, and ${window.__VEIL_NET_PENDING__ ? 'nothing on the page talks to the network except Veil, through its routes (even the fonts are served from here)' : 'nothing comes from the network except the fonts'}.
 
 **How it was built:** Claude Opus 5.5 wrote the kernel (processes, windows, a virtual filesystem) and this shell, then defined an app contract and spawned **${AGENTS.filter(id => OS.app(id)).length} Claude Fable 5.2 agents in parallel**. Each agent built one app from scratch against that contract and tested it in a headless browser, and the orchestrator integrated everything into the page you're using.
 
 The swarm ran for about 75 minutes, until every agent hit the Fable usage limit. Nine apps were finished by then. Terminal and Forge had tested cores but unfinished windows, so the orchestrator wrote the rest of their UI. Hive shows exactly who wrote what.
 
-Veil, a private browser that routes through the Nym mixnet and Tor, was added afterwards by the orchestrator. Inside a Claude artifact it can't connect (artifacts block all networking), so it explains its layers and links to the live edition.
+Veil, a private browser that routes through the Nym mixnet and Tor, was added afterwards by the orchestrator and then reviewed by a Fable 5.2 agent, which found 13 problems (all now addressed). ${window.__VEIL_NET_PENDING__ ? 'This is the networked edition, where Veil can reach real sites.' : 'Inside a Claude artifact it can\'t connect (artifacts block all networking), so it explains its layers and links to the live edition.'}
 
 ## The apps
 

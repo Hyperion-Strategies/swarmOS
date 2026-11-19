@@ -37,10 +37,12 @@ function set(id, state, detail) {
   if (logs.length > 500) logs.shift();
   for (const f of listeners) { try { f(id, Object.assign({}, l)); } catch (_) {} }
 }
-function withTimeout(p, ms, what) {
+// Reject after ms; if an AbortController is given, abort it too so the request underneath actually stops.
+function withTimeout(p, ms, what, ac) {
   let t;
-  return Promise.race([p, new Promise((_, j) => { t = setTimeout(() => j(new Error(what + ' (timed out after ' + Math.round(ms / 1000) + ' s)')), ms); })]).finally(() => clearTimeout(t));
+  return Promise.race([p, new Promise((_, j) => { t = setTimeout(() => { j(new Error(what + ' (timed out after ' + Math.round(ms / 1000) + ' s)')); if (ac) ac.abort(); }, ms); })]).finally(() => clearTimeout(t));
 }
+const quietly = f => { try { const r = f(); if (r && typeof r.catch === 'function') r.catch(() => {}); } catch (_) {} };
 function parseTarget(t) {
   const m = /^\[([^\]]+)\]:(\d+)$/.exec(t) || /^([^:]+):(\d+)$/.exec(t);
   if (!m) throw new Error('bad relay address ' + t);
@@ -74,15 +76,17 @@ function torLog(T, id) {
 }
 
 // ── layer 1: the Nym mixnet (one tunnel per page; Nym can't reopen it without a reload) ──
-let nymP = null, nymDead = null;
+let nymP = null, nymDead = null, nymMod = null;
 function nym() {
   if (nymDead) return Promise.reject(nymDead);
   return nymP || (nymP = (async () => {
     const t0 = performance.now();
     set('nym', 'connecting', 'Loading the mixnet client (about 18 MB, once per visit)');
-    const mt = await import('@nymproject/mix-tunnel');
+    const mt = nymMod = await import('@nymproject/mix-tunnel');
     set('nym', 'connecting', 'Joining the Nym mixnet: entry gateway, 3 mix layers, exit gateway');
-    await withTimeout(mt.setupMixTunnel({ connectTimeoutMs: 45000 }), 120000, 'mixnet setup');
+    // maxRedirects 0: mixFetch hands every 3xx back to Veil instead of following it inside the worker, so Veil sees
+    // each hop (address bar, base URL for links, HTTPS check) exactly as it does on the Tor routes
+    await withTimeout(mt.setupMixTunnel({ connectTimeoutMs: 45000, maxRedirects: 0 }), 120000, 'mixnet setup');
     const h = await mt.getMixTunnel();
     const { MixWebSocket } = await import('./vendor/mix-websocket/index.js');
     set('nym', 'ready', 'Mixnet tunnel up in ' + secs(t0));
@@ -93,19 +97,32 @@ function nym() {
     throw nymDead;
   }));
 }
+// After something on the mixnet fails: is the tunnel itself gone? It can't be reopened without a reload, so say so.
+async function nymCheck() {
+  if (!nymMod || nymDead || typeof nymMod.getTunnelState !== 'function') return;
+  try {
+    const s = await nymMod.getTunnelState();
+    if (s && (s.state === 'failed' || s.state === 'shutdown')) {
+      nymDead = new Error('The Nym tunnel closed' + (s.reason && s.reason.kind ? ' (' + s.reason.kind + ')' : '') + '. Reload the page to rejoin the mixnet.');
+      set('nym', 'failed', nymDead.message);
+    }
+  } catch (_) {}
+}
 
 // ── layer 2: Tor whose relay connections travel inside the mixnet ──
 let chainP = null;
 function torChain() {
-  return chainP || (chainP = (async () => {
+  if (chainP) return chainP;
+  let ws = null, wisp = null, client = null;
+  const me = chainP = (async () => {
     const n = await nym();
     const T = await torLib();
     const t0 = performance.now();
     set('relay', 'connecting', 'Opening ' + new URL(CFG.wispUrl).host + ' through the mixnet');
-    const ws = new n.MixWebSocket(CFG.wispUrl);
+    ws = new n.MixWebSocket(CFG.wispUrl);
     await withTimeout(ws.opened(), 90000, 'relay through the mixnet');
     if (ws.readyState !== 1) throw new Error('the relay could not be reached through the mixnet');
-    const wisp = new WispClient(ws);
+    wisp = new WispClient(ws);
     await withTimeout(wisp.ready, 60000, 'relay handshake');
     set('relay', 'ready', new URL(CFG.wispUrl).host + ' answered a Nym exit in ' + secs(t0));
     const provider = {
@@ -125,30 +142,54 @@ function torChain() {
     } catch (_) { /* fall back to fetching the directory from Tor itself */ }
     set('tor', 'connecting', bootstrap ? 'Snapshot received (' + (bootstrap.byteLength / 1048576).toFixed(1) + ' MB); building circuits inside the mixnet'
       : 'No snapshot: downloading the directory from Tor through the mixnet (slower)');
-    const client = new T.TorClient({ socketProvider: provider, bootstrap, storage: torStorage(T, 'veil-tor-chain'), log: torLog(T, 'tor'), logLevel: 'info' });
+    client = new T.TorClient({ socketProvider: provider, bootstrap, storage: torStorage(T, 'veil-tor-chain'), log: torLog(T, 'tor'), logLevel: 'info' });
     await withTimeout(client.ready(), 15 * 60000, 'Tor bootstrap through the mixnet');
     set('tor', 'ready', 'Tor ready inside the mixnet after ' + secs(t0));
+    // Every Tor relay connection rides this one relay session. If it drops, the client is dead: say so, and build a
+    // fresh chain on the next request instead of letting every request time out against a dead socket.
+    wisp.onshutdown = reason => {
+      if (chainP !== me) return;
+      chainP = null;
+      quietly(() => client.close());
+      set('relay', 'failed', 'The relay connection closed (' + reason + '). Veil rebuilds the route on the next page.');
+      set('tor', 'idle', '');
+      nymCheck();
+    };
     return client;
   })().catch(e => {
-    chainP = null;
+    if (chainP === me) chainP = null;
+    // tear down whatever got built, so a retry starts clean instead of stacking a second set of connections
+    if (client) quietly(() => client.close());
+    if (wisp) quietly(() => wisp.close());
+    else if (ws) quietly(() => ws.close());
     const which = layers.relay.state === 'ready' ? 'tor' : 'relay';
     set(which, 'failed', errText(e));
+    nymCheck();
     throw e;
-  }));
+  });
+  return me;
 }
 
 // ── Tor alone, through the tor-js gateway ──
 let gwP = null;
 function torGateway() {
-  return gwP || (gwP = (async () => {
+  if (gwP) return gwP;
+  let client = null;
+  const me = gwP = (async () => {
     const T = await torLib();
     const t0 = performance.now();
     set('torgw', 'connecting', 'Reaching Tor through the bridge gateway');
-    const client = new T.TorClient({ gateway: CFG.torGateway, storage: torStorage(T, 'veil-tor'), log: torLog(T, 'torgw'), logLevel: 'info' });
+    client = new T.TorClient({ gateway: CFG.torGateway, storage: torStorage(T, 'veil-tor'), log: torLog(T, 'torgw'), logLevel: 'info' });
     await withTimeout(client.ready(), 3 * 60000, 'Tor bootstrap');
     set('torgw', 'ready', 'Tor ready in ' + secs(t0));
     return client;
-  })().catch(e => { gwP = null; set('torgw', 'failed', errText(e)); throw e; }));
+  })().catch(e => {
+    if (gwP === me) gwP = null;
+    if (client) quietly(() => client.close());     // a retry gets a fresh client, not a second one beside a stuck one
+    set('torgw', 'failed', errText(e));
+    throw e;
+  });
+  return me;
 }
 
 async function readCapped(res, max) {
@@ -177,7 +218,9 @@ async function viaTor(client, url, o) {
 }
 async function viaNym(url, o) {
   const { h } = await nym();
-  const raw = await h.mixFetch(url, { method: o.method || 'GET', headers: o.headers || {}, body: o.body });
+  let raw;
+  try { raw = await h.mixFetch(url, { method: o.method || 'GET', headers: o.headers || {}, body: o.body }); }
+  catch (e) { nymCheck(); throw e; }
   if (raw.body && raw.body.byteLength > (o.maxBytes || 8388608)) throw new Error('response too large');
   return { status: raw.status, statusText: raw.statusText, headers: raw.headers, body: raw.body || new Uint8Array(0) };
 }
@@ -201,11 +244,21 @@ globalThis.VeilNet = {
   },
   // One HTTP request through a route. opts: {method, headers, body, isolationKey, signal, maxBytes, timeoutMs}
   async fetch(mode, url, opts = {}) {
-    const run = mode === 'chain' ? torChain().then(c => viaTor(c, url, opts))
-      : mode === 'tor' ? torGateway().then(c => viaTor(c, url, opts))
-      : mode === 'nym' ? viaNym(url, opts)
+    // One controller per request: the caller's signal (navigation stopped) and the timeout both abort the request
+    // itself on the Tor routes. mixFetch can't be cancelled, so on Nym the caller just stops waiting.
+    const ac = new AbortController();
+    if (opts.signal) { if (opts.signal.aborted) ac.abort(); else opts.signal.addEventListener('abort', () => ac.abort(), { once: true }); }
+    const o = Object.assign({}, opts, { signal: ac.signal });
+    const run = mode === 'chain' ? torChain().then(c => viaTor(c, url, o))
+      : mode === 'tor' ? torGateway().then(c => viaTor(c, url, o))
+      : mode === 'nym' ? viaNym(url, o)
       : Promise.reject(new Error('unknown route ' + mode));
-    return withTimeout(run, opts.timeoutMs || 120000, 'request');
+    const stopped = new Promise((_, j) => {
+      const no = () => j(new DOMException('The request was stopped', 'AbortError'));
+      if (ac.signal.aborted) no(); else ac.signal.addEventListener('abort', no, { once: true });
+    });
+    stopped.catch(() => {});
+    return withTimeout(Promise.race([run, stopped]), opts.timeoutMs || 120000, 'request', ac);
   },
   // Which IP the destination sees for this site, asked through the same circuit the site uses.
   async exit(mode, isolationKey) {
